@@ -123,7 +123,7 @@ Full workflows, accessibility notes, and the manual validation checklist live in
 PocketDrafts/
 ├── PocketDrafts.xcodeproj   # Xcode project (generated from project.yml)
 ├── PocketDrafts/
-│   ├── PocketDraftsApp.swift    # @main; MenuBarExtra popover + Settings scene
+│   ├── PocketDraftsApp.swift    # @main; AppKit status item + NSPopover + Settings scene
 │   ├── Models/                  # Note, Tag (SwiftData @Model)
 │   ├── Views/                   # RootView, DashboardView, NoteEditorView, …
 │   ├── Services/                # NoteService, ImportExportService, DeletionUndoService
@@ -136,6 +136,8 @@ PocketDrafts/
 ```
 
 The popover is a single `RootView` that switches between the note list and the editor. `@Query` feeds in-memory search and filtering, and every mutation flows through `NoteService` into the SwiftData `ModelContext`. Deletion snapshots are owned by the app itself, so the 10-second undo survives popover close and reopen.
+
+The status item is created with AppKit (`NSStatusItem` + `NSPopover`) because SwiftUI's `MenuBarExtra` scene exits immediately inside an LSUIElement app on current macOS builds; the SwiftUI interface itself is hosted unchanged.
 
 ## Verification
 
