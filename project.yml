@@ -34,6 +34,7 @@ targets:
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.eldio.PocketDrafts
+        INFOPLIST_FILE: Config/Info.plist
         INFOPLIST_KEY_LSUIElement: YES
         INFOPLIST_KEY_CFBundleDisplayName: Pocket Drafts
         INFOPLIST_KEY_NSPrincipalClass: NSApplication

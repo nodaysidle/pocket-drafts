@@ -334,6 +334,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = Config/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Pocket Drafts";
 				INFOPLIST_KEY_LSUIElement = YES;
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
@@ -456,6 +457,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = Config/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Pocket Drafts";
 				INFOPLIST_KEY_LSUIElement = YES;
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;

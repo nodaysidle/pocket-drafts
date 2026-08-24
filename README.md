@@ -37,7 +37,7 @@ Note apps are often heavy, demand a full window, or quietly sync your text to a 
 
 | What you get | Why it matters |
 | --- | --- |
-| **Instant capture** | Open the popover, press ⌘N, and start typing — no window juggling. |
+| **Instant capture** | Open the panel, press ⌘N, and start typing — no window juggling. |
 | **Local-first storage** | Notes and tags live in a SwiftData store inside Application Support. |
 | **Native macOS experience** | SwiftUI 6 designed for macOS 15 and later, keyboard-first. |
 | **Fast retrieval** | Live search across titles, content, and tags. |
@@ -72,7 +72,7 @@ Pocket Drafts is local-first by design and has **no network code**:
 
 ## Install
 
-Pocket Drafts is a menu-bar utility: launch it, then click the note icon in the macOS menu bar. The popover opens — there is no main window.
+Pocket Drafts is a menu-bar utility: launch it, then click the note icon in the macOS menu bar. A compact panel opens at the top-right — there is no main window.
 
 > [!NOTE]
 > Local builds are **ad-hoc signed and not Apple-notarized**. On first launch, macOS may ask you to right-click the app and choose **Open**, or approve it in **System Settings → Privacy & Security**.
@@ -105,6 +105,20 @@ open /Applications/PocketDrafts.app
 
 Full workflows, accessibility notes, and the manual validation checklist live in [USERGUIDE.md](USERGUIDE.md).
 
+### SketchyBar / hidden-menu-bar setups
+
+If your macOS menu bar is hidden (for example, a SketchyBar setup), the native status item has no visible home. Pocket Drafts registers the `pocketdrafts://` URL scheme — `open 'pocketdrafts://open'` opens the panel from any app, anchored to the top-right of the current screen. A Darwin notification (`com.nodaysidle.pocketdrafts.open`) toggles it without needing URL/AppleEvent delivery.
+
+To add a one-click button to your SketchyBar:
+
+```bash
+sketchybar --add item pocketdrafts right \
+  --set pocketdrafts \
+    icon="note.text" icon.color=0xff89b4fa \
+    label.drawing=off \
+    click_script="if /usr/bin/pgrep -x PocketDrafts >/dev/null; then /usr/bin/notifyutil -p com.nodaysidle.pocketdrafts.open; else /usr/bin/open 'pocketdrafts://open'; fi"
+```
+
 ## Keyboard shortcuts
 
 | Action | Shortcut |
@@ -123,7 +137,7 @@ Full workflows, accessibility notes, and the manual validation checklist live in
 PocketDrafts/
 ├── PocketDrafts.xcodeproj   # Xcode project (generated from project.yml)
 ├── PocketDrafts/
-│   ├── PocketDraftsApp.swift    # @main; AppKit status item + NSPopover + Settings scene
+│   ├── PocketDraftsApp.swift    # @main; AppKit status item + floating panel + Settings scene
 │   ├── Models/                  # Note, Tag (SwiftData @Model)
 │   ├── Views/                   # RootView, DashboardView, NoteEditorView, …
 │   ├── Services/                # NoteService, ImportExportService, DeletionUndoService
@@ -135,9 +149,9 @@ PocketDrafts/
 └── USERGUIDE.md
 ```
 
-The popover is a single `RootView` that switches between the note list and the editor. `@Query` feeds in-memory search and filtering, and every mutation flows through `NoteService` into the SwiftData `ModelContext`. Deletion snapshots are owned by the app itself, so the 10-second undo survives popover close and reopen.
+The panel hosts a single `RootView` that switches between the note list and the editor. `@Query` feeds in-memory search and filtering, and every mutation flows through `NoteService` into the SwiftData `ModelContext`. Deletion snapshots are owned by the app itself, so the 10-second undo survives panel close and reopen.
 
-The status item is created with AppKit (`NSStatusItem` + `NSPopover`) because SwiftUI's `MenuBarExtra` scene exits immediately inside an LSUIElement app on current macOS builds; the SwiftUI interface itself is hosted unchanged.
+The status item is created with AppKit (`NSStatusItem` + floating panel) because SwiftUI's `MenuBarExtra` scene exits immediately inside an LSUIElement app on current macOS builds, and an `NSPopover` cannot attach to a hidden menu bar; the SwiftUI interface itself is hosted unchanged.
 
 ## Verification
 
