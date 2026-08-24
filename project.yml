@@ -1,0 +1,73 @@
+name: PocketDrafts
+options:
+  bundleIdPrefix: com.eldio
+  deploymentTarget:
+    macOS: "15.0"
+  createIntermediateGroups: true
+
+configs:
+  Debug: debug
+  Release: release
+
+settings:
+  base:
+    SWIFT_VERSION: "6.0"
+    MACOSX_DEPLOYMENT_TARGET: "15.0"
+    SWIFT_STRICT_CONCURRENCY: complete
+    SWIFT_DEFAULT_ACTOR_ISOLATION: MainActor
+    CODE_SIGN_STYLE: Manual
+    CODE_SIGN_IDENTITY: "-"
+    GENERATE_INFOPLIST_FILE: YES
+    CURRENT_PROJECT_VERSION: "1"
+    MARKETING_VERSION: "1.0"
+    ENABLE_USER_SCRIPT_SANDBOXING: YES
+  configs:
+    Debug:
+      ENABLE_TESTABILITY: YES
+
+targets:
+  PocketDrafts:
+    type: application
+    platform: macOS
+    sources:
+      - path: PocketDrafts
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.eldio.PocketDrafts
+        INFOPLIST_KEY_LSUIElement: YES
+        INFOPLIST_KEY_CFBundleDisplayName: Pocket Drafts
+        INFOPLIST_KEY_NSPrincipalClass: NSApplication
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+
+  PocketDraftsTests:
+    type: bundle.unit-test
+    platform: macOS
+    sources:
+      - path: PocketDraftsTests
+    dependencies:
+      - target: PocketDrafts
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.eldio.PocketDraftsTests
+        TEST_HOST: $(BUILT_PRODUCTS_DIR)/PocketDrafts.app/Contents/MacOS/PocketDrafts
+        BUNDLE_LOADER: $(TEST_HOST)
+        # XCTestCase declares nonisolated initializers; test classes opt in to
+        # MainActor isolation explicitly instead of inheriting it target-wide.
+        SWIFT_DEFAULT_ACTOR_ISOLATION: nonisolated
+
+schemes:
+  PocketDrafts:
+    build:
+      targets:
+        PocketDrafts: all
+        PocketDraftsTests: [test]
+    run:
+      config: Debug
+    test:
+      config: Debug
+      targets:
+        - PocketDraftsTests
+    profile:
+      config: Release
+    archive:
+      config: Release

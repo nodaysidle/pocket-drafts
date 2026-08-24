@@ -1,0 +1,14 @@
+# Build artifacts
+DerivedData/
+DerivedDataFinalRelease/
+.build/
+.swiftpm/
+
+# Xcode user state (the generated project itself is tracked)
+*.xcodeproj/xcuserdata/
+xcuserdata/
+*.xcscmblueprint
+*.xccheckout
+
+# macOS
+.DS_Store
