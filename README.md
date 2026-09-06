@@ -16,6 +16,17 @@
   <img alt="SwiftData" src="https://img.shields.io/badge/Storage-SwiftData-5B7CFA?style=flat-square">
   <img alt="Local only" src="https://img.shields.io/badge/data-local--only-4c8c6b?style=flat-square">
   <img alt="No telemetry" src="https://img.shields.io/badge/telemetry-none-4c8c6b?style=flat-square">
+  <img alt="MIT" src="https://img.shields.io/badge/license-MIT-blue?style=flat-square">
+</p>
+
+<p align="center">
+  <a href="https://github.com/nodaysidle/pocket-drafts/releases/download/v1.0/PocketDrafts-1.0-macos-universal.zip"><strong>Download universal .app zip (v1.0)</strong></a>
+  ·
+  <a href="https://github.com/nodaysidle/pocket-drafts">GitHub</a>
+</p>
+
+<p align="center">
+  <em>Universal macOS .app zip · ad-hoc signed / not notarized · not a DMG · no iOS</em>
 </p>
 
 <p align="center">
@@ -74,8 +85,16 @@ Pocket Drafts is local-first by design and has **no network code**:
 
 Pocket Drafts is a menu-bar utility: launch it, then click the note icon in the macOS menu bar. A compact panel opens at the top-right — there is no main window.
 
+### Download (macOS universal)
+
+1. Download [`PocketDrafts-1.0-macos-universal.zip`](https://github.com/nodaysidle/pocket-drafts/releases/download/v1.0/PocketDrafts-1.0-macos-universal.zip).
+2. Unzip and move `PocketDrafts.app` to `/Applications`.
+3. First launch: right-click → **Open** if Gatekeeper blocks it (ad-hoc / not notarized).
+
+Universal macOS `.app` zip only — not a DMG. No iOS build.
+
 > [!NOTE]
-> Local builds are **ad-hoc signed and not Apple-notarized**. On first launch, macOS may ask you to right-click the app and choose **Open**, or approve it in **System Settings → Privacy & Security**.
+> Release and local builds are **ad-hoc signed and not Apple-notarized**. On first launch, macOS may ask you to right-click the app and choose **Open**, or approve it in **System Settings → Privacy & Security**.
 
 ### Build from source
 
