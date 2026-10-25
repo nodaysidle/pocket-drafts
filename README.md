@@ -91,6 +91,12 @@ Pocket Drafts is a menu-bar utility: launch it, then click the note icon in the 
 2. Unzip and move `PocketDrafts.app` to `/Applications`.
 3. First launch: right-click → **Open** if Gatekeeper blocks it (ad-hoc / not notarized).
 
+| File | Size | SHA-256 |
+|---|---|---|
+| `PocketDrafts-1.0-macos-universal.zip` | 368,787 bytes | `4017e2f892f9311f37ddc104d4b37c8a86c6cdf556d9d2615bb352e2199c4cf7` |
+
+Verify with `shasum -a 256 PocketDrafts-1.0-macos-universal.zip`.
+
 Universal macOS `.app` zip only — not a DMG. No iOS build.
 
 > [!NOTE]
